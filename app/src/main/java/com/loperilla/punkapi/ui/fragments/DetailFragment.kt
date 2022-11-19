@@ -1,4 +1,4 @@
-package com.loperilla.punkapi
+package com.loperilla.punkapi.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

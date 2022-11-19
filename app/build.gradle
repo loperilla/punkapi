@@ -1,16 +1,20 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
     namespace 'com.loperilla.punkapi'
-    compileSdk 32
+    compileSdk rootProject.ext.compileSDK
 
     defaultConfig {
         applicationId "com.loperilla.punkapi"
-        minSdk 21
-        targetSdk 32
+        minSdk rootProject.ext.minimunSDK
+        targetSdk rootProject.ext.compileSDK
         versionCode 1
         versionName "1.0"
 
@@ -30,13 +34,30 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.ext.kotlinVersion"
 
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    //Corrutinas
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.ext.navVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.ext.navVersion"
+
+    //dagger hilt
+    implementation "com.google.dagger:hilt-android:$rootProject.ext.hiltVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$rootProject.ext.hiltVersion"
+
     implementation 'com.android.support.constraint:constraint-layout:2.0.4'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

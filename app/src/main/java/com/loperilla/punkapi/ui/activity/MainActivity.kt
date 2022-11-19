@@ -1,7 +1,8 @@
-package com.loperilla.punkapi
+package com.loperilla.punkapi.ui.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.loperilla.punkapi.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

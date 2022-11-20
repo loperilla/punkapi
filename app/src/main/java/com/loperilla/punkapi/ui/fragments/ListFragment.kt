@@ -10,7 +10,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.ItemAnimator
 import com.loperilla.punkapi.databinding.ListFragmentBinding
+import com.loperilla.punkapi.network.model.Beer
+import com.loperilla.punkapi.ui.adapter.BeersAdapter
 import com.loperilla.punkapi.ui.viewmodel.BeerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -51,26 +55,26 @@ class ListFragment : Fragment() {
                     //
                 }
             })
-
-            it.buttonTest.setOnClickListener {
-                findNavController().navigate(
-                    ListFragmentDirections.actionListFragmentToDetailFragment("Estrella Galicia")
-                )
-            }
         }
     }
 
     private fun setUpObservers() {
         beersViewModel.getBeersLiveData().observe(viewLifecycleOwner) { beerList ->
-            beerList.forEach { beer ->
-                Log.e("beerLivedata", "$beer")
-            }
+            setUpRecyclerViewAdapter(beerList)
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        beersViewModel.getRandom()
+    private fun setUpRecyclerViewAdapter(beerList: List<Beer>) {
+        val layoutManager =  LinearLayoutManager(viewRoot.context)
+        val adapter = BeersAdapter(beerList) {
+            findNavController().navigate(
+                ListFragmentDirections.actionListFragmentToDetailFragment(it)
+            )
+        }
+        binding.rvBeers.also {
+            it.layoutManager = layoutManager
+            it.adapter = adapter
+        }
     }
 
     override fun onDestroyView() {

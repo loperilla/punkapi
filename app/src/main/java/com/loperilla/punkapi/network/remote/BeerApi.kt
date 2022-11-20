@@ -11,7 +11,4 @@ interface BeerApi {
         @Query("page") nPage: Int,
         @Query("beer_name") beerName: String
     ): Response<List<Beer>>
-
-    @GET("beers/random")
-    suspend fun getRandom(): Response<List<Beer>>
 }

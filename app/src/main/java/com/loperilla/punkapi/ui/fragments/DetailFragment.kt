@@ -30,7 +30,7 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.also {
-            it.beerName.text = navArgs.beer
+            it.beerName.text = navArgs.beer.name
         }
     }
 }

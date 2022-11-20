@@ -22,6 +22,6 @@
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="beer"
-            app:argType="string" />
+            app:argType="com.loperilla.punkapi.network.model.Beer" />
     </fragment>
 </navigation>

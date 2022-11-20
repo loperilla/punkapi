@@ -13,13 +13,4 @@ class BeerService @Inject constructor(private val api: BeerApi) {
             response.body() ?: emptyList()
         }
     }
-
-    suspend fun getRandom(): Beer? {
-        return withContext(Dispatchers.IO) {
-            Log.e("algo", api.getRandom().raw().toString())
-            val raw = api.getRandom().raw()
-            val response = api.getRandom()
-            response.body()?.first()
-        }
-    }
 }
